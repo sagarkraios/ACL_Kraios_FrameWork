@@ -175,7 +175,7 @@ public class BaseTest {
 		}
 	}
 
-	public void passTest(String validationMessage) {
+	public static synchronized void passTest(String validationMessage) {
 		if (!PropertyLoader.getProperties("isItApiExecution").equals("true")) {
 
 			if (PropertyLoader.isPassedScreenShotRequired.equalsIgnoreCase("true")) {
@@ -196,11 +196,11 @@ public class BaseTest {
 		}
 	}
 
-	public void failTest(String validationMessage, Hashtable<String, Object> data) {
+	public static synchronized void failTest(String validationMessage, Hashtable<String, Object> data) {
 		throw new RuntimeException(validationMessage);
 	}
 
-	public void skipTest(String validationMessage) {
+	public static synchronized void skipTest(String validationMessage) {
 		((ExtentTest) logger.get()).skip(MarkupHelper.createLabel(validationMessage + " SKIPPED ", ExtentColor.ORANGE))
 				.addScreenCaptureFromBase64String(((SeleniumWrapper) seleniumWrapperManager.get()).takeScreenshot());
 	}
